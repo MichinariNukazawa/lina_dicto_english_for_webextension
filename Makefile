@@ -16,8 +16,6 @@ copy:
 	cp -r ../lina_dicto_for_webextension .
 	cp lina_dicto_english/lina_dicto/lina_dicto/js/dictionary_loader.js \
 		lina_dicto_for_webextension/lina_dicto/js/
-	cp lina_dicto_english/lina_dicto/lina_dicto/js/language.js \
-		lina_dicto_for_webextension/popup/
 	# manifest.json
 	sed -i -e 's/Esperanto/English/' lina_dicto_for_webextension/manifest.json
 	sed -i -e 's/"name".*,/"name": "lina_dicto_english for webextension",/' \
