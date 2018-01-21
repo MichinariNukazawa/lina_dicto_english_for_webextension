@@ -24,6 +24,9 @@ copy:
 		lina_dicto_for_webextension/manifest.json
 	#
 	cp -r overwrite/* lina_dicto_for_webextension/
+	#
+	cp lina_dicto_english/lina_dicto/lina_dicto/js/language.js \
+		lina_dicto_for_webextension/popup/
 	# icon
 	convert lina_dicto_english/overwrite/image/icon.png -resize 48 \
 		lina_dicto_for_webextension/icon/icon_48.png
