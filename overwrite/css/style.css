@@ -1,0 +1,43 @@
+@charset "utf-8";
+
+html, body{
+	margin: 0;         /* 余白の削除 */
+	padding: 0;        /* 余白の削除 */
+
+	background: rgba(200, 240, 255, 1);
+
+	font-size:90%;
+}
+
+h1{
+	margin: .1em;
+}
+h2{
+	display: table;
+	padding: .1em;
+	padding-right: 5em;
+	color: #EEEEEE;
+	background-color: #433f3e;
+	margin: .1em;
+}
+h3,h4,h5{
+	padding: .1em;
+	padding-left: .3em;
+	border-left: solid 6px rgba(0, 0, 170, 1);
+	margin: .1em;
+	margin-top: .3em;
+}
+
+#message_area{
+	display:none;
+	font-size:70%;
+}
+
+#license_area{
+	display:none;
+}
+
+#license_text{
+	font-size:90%;
+}
+
