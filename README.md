@@ -10,6 +10,7 @@ lina\_dicto\_english for webextension は、ブラウザ上でEnglishの単語�
 技術等の詳細はこれらを参照ください。  
 
 # Screenshot/Image
+![lina\_dicto\_english for webextension hover](document/image/20180122_hover.png)  
 ![lina\_dicto\_english for webextension](document/image/lina_dicto_english_for_webextension.png)  
 
 # Get this
