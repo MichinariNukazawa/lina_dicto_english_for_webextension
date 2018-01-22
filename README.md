@@ -14,7 +14,7 @@ lina\_dicto\_english for webextension は、ブラウザ上でEnglishの単語�
 ![lina\_dicto\_english for webextension](document/image/lina_dicto_english_for_webextension.png)  
 
 # Get this
-[Firefox Add-ons](https://addons.mozilla.org/ja/firefox/addon/lina_dicto_english_for_webextension/)  
+[Firefox Add-ons](https://addons.mozilla.org/ja/firefox/addon/lina_dicto_english_for_webexte/)  
 
 
 # Build
