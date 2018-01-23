@@ -21,7 +21,7 @@ class Hover{
 		let word_element = document.createElement('div');
 		word_element.style.cssText =
 			''
-			+ 'font-size:40%;'
+			+ 'font-size:60%;'
 			+ "font-family: Consolas, 'Courier New', Courier, Monaco, monospace;";
 		let explanation_element = document.createElement('div');
 		explanation_element.style.cssText =
@@ -62,6 +62,47 @@ class Hover{
 		return '' + value + 'px';
 	}
 
+	/** @brief スペル修正候補を返す */
+	get_candidate_word_from_keyword(keyword)
+	{
+		const candidates = Esperanto.get_candidates(keyword);
+		for(const candidate of candidates){
+			let index = dictionary.get_index_from_incremental_keyword(candidate);
+			let item = dictionary.get_item_from_index(index);
+			if(item){
+				return item;
+			}
+		}
+
+		return null;
+	}
+
+	get_show_info_from_keyword(keyword){
+		let show_info = {
+			'show_keyword':keyword,
+			'explanation_text':'',
+			'candidate_word':''
+		};
+
+		if(20 < keyword.length){
+			show_info.show_word = keyword.substr(0, 10) + "~";
+		}else if(! Esperanto.is_esperanto_string(keyword)){
+			show_info.explanation_text = keyword;
+		}else{
+			let k_word = Esperanto.caret_sistemo_from_str(keyword);
+			let item = dictionary.get_item_from_keyword(k_word);
+			if(null === item){
+				item = this.get_candidate_word_from_keyword(k_word);
+				if(null !== item){
+					show_info.candidate_word = dictionary.get_show_word_from_item(item);
+				}
+			}
+			show_info.explanation_text = dictionary.get_explanation_from_item(item);
+		}
+
+		return show_info;
+	}
+
 	show(x, y, word){
 		// console.debug(word + " :" + x + "," + y);
 
@@ -78,25 +119,15 @@ class Hover{
 			}
 			this.state.prev_word = word;
 
-			let item = null;
-			let explanation_text = "";
-			let show_word = word;
-			if(20 < word.length){
-				show_word = word.substr(0, 10) + "~";
-			}else if(! Esperanto.is_esperanto_string(word)){
-				explanation_text = word;
-			}else{
-				let k_word = Esperanto.caret_sistemo_from_str(word);
-				item = dictionary.get_item_from_keyword(k_word);
-				explanation_text = dictionary.get_explanation_from_item(item);
-			}
-			if(item){
+			let show_info = this.get_show_info_from_keyword(word);
+
+			if(0 !== show_info.explanation_text.length){
 				this.state.result_root_element
-					.style["border-width"] = "2px";
+					.style["border-width"] = "3px";
 				this.state.explanation_element
 					.style["display"] = "block";
 				this.state.explanation_element
-					.textContent = explanation_text;
+					.textContent = show_info.explanation_text;
 			}else{
 				this.state.result_root_element
 					.style["border-width"] = "1.5px";
@@ -104,7 +135,16 @@ class Hover{
 					.style["display"] = "none";
 			}
 
-			this.state.word_element.textContent = "`" + show_word + "`";
+			let show_word = '`' + show_info.show_keyword + '`';
+			if(0 === show_info.candidate_word.length){
+				this.state.result_root_element
+					.style["border-color"] = 'rgba(0, 0, 170, 1)';
+			}else{
+				this.state.result_root_element
+					.style["border-color"] = 'rgba(110, 190, 255, 1)';
+				show_word += ' -> `' + show_info.candidate_word + '`';
+			}
+			this.state.word_element.textContent = show_word;
 		}
 	}
 };
